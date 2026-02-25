@@ -1,5 +1,4 @@
 # Criptografía Bitcoin — Guía del Estudiante
-### 2 sesiones de 90 minutos
 
 Vas a construir la maquinaria criptográfica real que impulsa Bitcoin — desde cero, en Java puro, usando únicamente la biblioteca estándar. Al terminar la Sesión 2 entenderás cómo Bitcoin prueba identidad sin contraseñas, y por qué falsificar una transacción es matemáticamente imposible.
 
@@ -75,7 +74,7 @@ Bitcoin usa SHA-256 en todas partes: para identificar bloques, como núcleo del 
 
 **Implementa:** `sha256(String text)` usando `MessageDigest.getInstance("SHA-256")`.
 
-`digest()` devuelve un `byte[]`. Convierte cada byte a dos dígitos hexadecimales con `String.format("%02x", b)`.
+`digest()` devuelve un `byte[]`. Convierte el array de bytes a hexadecimal con `HexFormat.of().formatHex(bytes)`.
 
 **Una vez que funcione**, ejecútalo y observa:
 
