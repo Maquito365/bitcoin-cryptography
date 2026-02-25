@@ -64,7 +64,10 @@ public class Blockchain {
      * TODO: implementar este método.
      */
     public void addBlock(String data) {
-        throw new UnsupportedOperationException("TODO: implementar addBlock()");
+        Block ultimoBloque = chain.get(chain.size() - 1);
+        Block nuevoBloque = new Block (data, ultimoBloque.hash);
+        nuevoBloque.mine(difficulty);
+        chain.add(nuevoBloque);
     }
 
     /**
@@ -78,7 +81,18 @@ public class Blockchain {
      * TODO: implementar este método.
      */
     public boolean isValid() {
-        throw new UnsupportedOperationException("TODO: implementar isValid()");
+        for(int i=1; i<chain.size(); i++){
+            Block bloqueActual = chain.get(i);
+            Block bloqueAnterior = chain.get(i-1);
+            if(!bloqueActual.hash.equals(bloqueActual.calculateHash())){
+                return false;
+            }
+            if(!bloqueActual.previousHash.equals(bloqueAnterior.hash)){
+                return false;
+            }
+            
+        }
+        return true;
     }
 
     public List<Block> getChain() { return chain; }

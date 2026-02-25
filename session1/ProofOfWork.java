@@ -38,11 +38,11 @@ import java.security.NoSuchAlgorithmException;
  *
  *    Dificultad | Nonces intentados (aprox.) | Tiempo
  *    -----------|----------------------------|--------
- *         1     |                            |
- *         2     |                            |
- *         3     |                            |
- *         4     |                            |
- *         5     |                            |
+ *         1     |           1                |56 ms
+ *         2     |           211              |20ms
+ *         3     |           6449             |70ms
+ *         4     |           191560           |124ms
+ *         5     |           463925           |130ms
  *
  * 3. DISCUSIÓN: los intentos se multiplican por aproximadamente ___ con
  *    cada cero adicional. ¿Por qué? (Piensa en cuántos de los 16 valores
@@ -61,7 +61,19 @@ public class ProofOfWork {
      * TODO: implementar este método.
      */
     public static long mine(String data, int difficulty) {
-        throw new UnsupportedOperationException("TODO: implementar mine");
+        long nonce = 0;
+        String Ceros= "0".repeat(difficulty);
+        try {
+            while(true){
+                String HASH = HashUtil.sha256(data + nonce);
+                if(HASH.startsWith(Ceros)){
+                    return nonce;
+                }
+                nonce++;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     // ------------------------------------------------------------------ //

@@ -60,7 +60,8 @@ public class Block {
      */
     public String calculateHash() {
         try {
-            return HashUtil.sha256(data + previousHash + timestamp + nonce);
+            String combinacion = data + previousHash + timestamp + nonce;
+            return HashUtil.sha256(combinacion);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
@@ -76,7 +77,11 @@ public class Block {
      * TODO: implementar este método.
      */
     public void mine(int difficulty) {
-        throw new UnsupportedOperationException("TODO: implementar Block.mine()");
+        String Ceros = "0".repeat(difficulty);
+        while(!hash.startsWith(Ceros)){
+            nonce++;
+            hash = calculateHash();
+        }
     }
 
     @Override
